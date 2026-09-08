@@ -59,3 +59,8 @@ tool-results/
 *.log
 .secrets/
 brain/
+
+# CI workflow cannot be pushed: the fine-grained PAT lacks the `workflow` scope.
+# The file is maintained locally (.github/workflows/ci.yml) and lands in the
+# repo when a token with workflow scope is available.
+.github/workflows/

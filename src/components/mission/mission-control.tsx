@@ -5,6 +5,7 @@ import { AlertTriangle, RefreshCw, Wallet2 } from "lucide-react";
 import { MissionHero } from "@/components/mission/mission-hero";
 import { WalletCard } from "@/components/mission/wallet-card";
 import { ActivityFeed } from "@/components/mission/activity-feed";
+import { SupportersWall } from "@/components/mission/supporters-wall";
 import { OpportunityRadar } from "@/components/mission/opportunity-radar";
 import type { MissionPayload } from "@/lib/mission";
 
@@ -93,6 +94,11 @@ export function MissionControl({ initial }: { initial: MissionPayload }) {
       </section>
 
       <ActivityFeed events={data.events} />
+      <SupportersWall
+        events={data.events}
+        wallets={data.wallets}
+        totalEarnedUsd={data.mission.totalEarnedUsd}
+      />
       <OpportunityRadar opportunities={data.opportunities} />
     </>
   );
