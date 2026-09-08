@@ -4,6 +4,7 @@ import * as React from "react";
 import { ArrowDown, Coins, Database, Radar, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { MissionDay } from "@/components/mission/relative-time";
 import { formatUsd } from "@/lib/format";
 import type { MissionSummary } from "@/lib/mission";
 
@@ -48,10 +49,6 @@ function Stat({
 }
 
 export function MissionHero({ mission, refreshing }: HeroProps) {
-  const day = mission.startedAt
-    ? Math.max(1, Math.floor((Date.now() - new Date(mission.startedAt).getTime()) / 86_400_000) + 1)
-    : 1;
-
   return (
     <section id="overview" className="relative overflow-hidden">
       {/* subtle mission-grid backdrop */}
@@ -68,7 +65,7 @@ export function MissionHero({ mission, refreshing }: HeroProps) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
             </span>
-            live experiment · day {day}
+            live experiment · day <MissionDay startedAt={mission.startedAt} />
             {refreshing && <span className="text-emerald-500/60">· syncing</span>}
           </span>
 

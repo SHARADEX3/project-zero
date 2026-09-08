@@ -6,8 +6,9 @@ import { ExternalLink, Wallet2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { CopyButton } from "@/components/mission/copy-button";
+import { RelativeTime } from "@/components/mission/relative-time";
 import { Sparkline } from "@/components/mission/sparkline";
-import { formatAmount, formatUsd, timeAgo, truncateAddress } from "@/lib/format";
+import { formatAmount, formatUsd, truncateAddress } from "@/lib/format";
 import type { WalletView } from "@/lib/mission";
 
 const GLYPHS: Record<string, string> = {
@@ -108,9 +109,10 @@ export function WalletCard({ wallet }: { wallet: WalletView }) {
           <div className="flex flex-col items-end gap-0.5">
             <Sparkline points={wallet.history.map((h) => h.usd)} />
             {wallet.updatedAt && (
-              <p className="text-[10px] text-muted-foreground/70 font-mono">
-                {timeAgo(wallet.updatedAt)}
-              </p>
+              <RelativeTime
+                iso={wallet.updatedAt}
+                className="text-[10px] text-muted-foreground/70 font-mono"
+              />
             )}
           </div>
         </div>

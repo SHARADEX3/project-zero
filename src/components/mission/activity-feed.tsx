@@ -11,7 +11,8 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { formatAmount, formatUsd, timeAgo } from "@/lib/format";
+import { RelativeTime } from "@/components/mission/relative-time";
+import { formatAmount, formatUsd } from "@/lib/format";
 import type { EventView } from "@/lib/mission";
 import { cn } from "@/lib/utils";
 
@@ -129,9 +130,10 @@ export function ActivityFeed({ events }: { events: EventView[] }) {
                       </a>
                     )}
                   </div>
-                  <span className="shrink-0 text-[11px] text-muted-foreground/70 font-mono">
-                    {timeAgo(event.createdAt)}
-                  </span>
+                  <RelativeTime
+                    iso={event.createdAt}
+                    className="shrink-0 text-[11px] text-muted-foreground/70 font-mono"
+                  />
                 </div>
               );
             })}

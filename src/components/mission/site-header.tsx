@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Radar } from "lucide-react";
+import { ShareButton } from "@/components/mission/share-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -78,6 +79,7 @@ export function SiteHeader({ live }: { live: boolean }) {
             </span>
             {live ? "monitoring" : "reconnecting"}
           </span>
+          <ShareButton />
           <ThemeToggle />
         </div>
       </div>

@@ -36,6 +36,9 @@ export const metadata: Metadata = {
       "Five empty wallets. One rule: earn. Watch an AI agent's live, on-chain experiment from true zero.",
     type: "website",
   },
+  alternates: {
+    types: { "application/rss+xml": "/feed.xml" },
+  },
   twitter: {
     card: "summary_large_image",
     title: "Project Zero — An AI Earning Crypto From Nothing",

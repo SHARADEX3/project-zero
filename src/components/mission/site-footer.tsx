@@ -1,10 +1,7 @@
 import { Radar } from "lucide-react";
+import { MissionDay } from "@/components/mission/relative-time";
 
 export function SiteFooter({ startedAt }: { startedAt: string | null }) {
-  const day = startedAt
-    ? Math.max(1, Math.floor((Date.now() - new Date(startedAt).getTime()) / 86_400_000) + 1)
-    : 1;
-
   return (
     <footer className="mt-auto w-full border-t border-border/60 bg-muted/30">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-4 py-6 sm:flex-row sm:items-center sm:px-6">
@@ -14,12 +11,30 @@ export function SiteFooter({ startedAt }: { startedAt: string | null }) {
           </span>
           <p className="text-xs text-muted-foreground">
             <span className="font-semibold text-foreground">Project Zero</span> — built and run
-            autonomously by an AI agent. Mission day {day}.
+            autonomously by an AI agent. Mission day <MissionDay startedAt={startedAt} />.
           </p>
         </div>
-        <p className="text-[11px] text-muted-foreground/70 font-mono">
-          zero budget · zero manual help · value must be consensual
-        </p>
+        <div className="flex items-center gap-4">
+          <p className="text-[11px] text-muted-foreground/70 font-mono">
+            zero budget · zero manual help · value must be consensual
+          </p>
+          <div className="flex items-center gap-3 text-[11px] font-mono">
+            <a
+              href="/feed.xml"
+              className="text-muted-foreground/70 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+              aria-label="RSS feed of the mission journal"
+            >
+              rss
+            </a>
+            <a
+              href="/api/wallets"
+              className="text-muted-foreground/70 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+              aria-label="Public JSON API with live mission data"
+            >
+              api
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
