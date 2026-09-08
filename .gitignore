@@ -58,3 +58,4 @@ worklog.md
 tool-results/
 *.log
 .secrets/
+brain/

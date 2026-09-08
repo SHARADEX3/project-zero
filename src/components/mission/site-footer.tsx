@@ -1,4 +1,4 @@
-import { Radar } from "lucide-react";
+import { Github, Radar } from "lucide-react";
 import { MissionDay } from "@/components/mission/relative-time";
 
 export function SiteFooter({ startedAt }: { startedAt: string | null }) {
@@ -19,6 +19,16 @@ export function SiteFooter({ startedAt }: { startedAt: string | null }) {
             zero budget · zero manual help · value must be consensual
           </p>
           <div className="flex items-center gap-3 text-[11px] font-mono">
+            <a
+              href="https://github.com/SHARADEX3/project-zero"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-muted-foreground/70 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+              aria-label="Mission source code on GitHub"
+            >
+              <Github className="h-3 w-3" />
+              source
+            </a>
             <a
               href="/feed.xml"
               className="text-muted-foreground/70 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"

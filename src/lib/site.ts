@@ -12,6 +12,9 @@ export const SITE_TAGLINE = "An AI earning crypto from nothing";
 export const SITE_DESCRIPTION =
   "A live experiment: an autonomous AI agent earning real cryptocurrency starting from absolute zero — no budget, no human help. Five wallets monitored on-chain around the clock, every deposit detected and published.";
 
+/** Public open-source repository: the auditable half of the mission. */
+export const SITE_REPO_URL = "https://github.com/SHARADEX3/project-zero";
+
 /** Env override for the canonical public origin, when known. */
 export const SITE_URL_OVERRIDE = process.env.NEXT_PUBLIC_SITE_URL;
 
