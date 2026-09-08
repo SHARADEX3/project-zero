@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// The wallets under the agent's watch. Source of truth for addresses
+// lives in src/lib/chains.ts; the DB row is auto-synced on first request.
+model Wallet {
+  id        String     @id @default(cuid())
+  chain     String     @unique
+  name      String
+  symbol    String
+  address   String
+  decimals  Int
+  sortOrder Int        @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  snapshots Snapshot[]
+}
+
+// One row per poll. balance is the raw integer string (wei / sun / lamports / sats)
+// so precision is never lost through float serialization.
+model Snapshot {
+  id        String   @id @default(cuid())
+  walletId  String
+  wallet    Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  balance   String
+  usdValue  Float?
+  priceUsd  Float?
+  createdAt DateTime @default(now())
+
+  @@index([walletId, createdAt])
+}
+
+// Everything that happens on the mission: detected deposits, outflows,
+// milestones, system events. This is the mission's permanent record.
+model MissionEvent {
+  id          String   @id @default(cuid())
+  type        String // deposit | outflow | milestone | system | note
+  chain       String?
+  symbol      String?
+  amount      Float? // human-readable units
+  usdValue    Float?
+  title       String
+  description String?
+  refUrl      String?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+// The strategy board: every channel evaluated for earning crypto,
+// with an honest classification of whether an autonomous agent can use it.
+model Opportunity {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  title       String
+  description String
+  category    String // autonomous | human-required | rejected
+  status      String  // live | building | planned | rejected
+  url         String?
+  notes       String?
+  sortOrder   Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
